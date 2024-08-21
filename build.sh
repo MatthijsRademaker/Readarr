@@ -89,7 +89,10 @@ Build()
 YarnInstall()
 {
     ProgressStart 'yarn install'
-    yarn install --frozen-lockfile --network-timeout 120000
+    pwd
+    ls -l
+    yarn install
+    # yarn install --frozen-lockfile --network-timeout 120000
     ProgressEnd 'yarn install'
 }
 
@@ -414,28 +417,25 @@ then
     then
         Package "net6.0" "win-x64"
         Package "net6.0" "win-x86"
-        Package "net6.0" "linux-x64"
-        Package "net6.0" "linux-musl-x64"
-        Package "net6.0" "linux-arm64"
-        Package "net6.0" "linux-musl-arm64"
-        Package "net6.0" "linux-arm"
-        Package "net6.0" "linux-musl-arm"
-        Package "net6.0" "osx-x64"
-        Package "net6.0" "osx-arm64"
-        if [ "$ENABLE_EXTRA_PLATFORMS" = "YES" ];
-        then
-            Package "net6.0" "freebsd-x64"
-            Package "net6.0" "linux-x86"
-        fi
+        # Package "net6.0" "linux-x64"
+        # Package "net6.0" "linux-musl-x64"
+        # Package "net6.0" "linux-arm64"
+        # Package "net6.0" "linux-musl-arm64"
+        # Package "net6.0" "linux-arm"
+        # Package "net6.0" "linux-musl-arm"
+        # Package "net6.0" "osx-x64"
+        # Package "net6.0" "osx-arm64"
+        # if [ "$ENABLE_EXTRA_PLATFORMS" = "YES" ];
+        # then
+        #     Package "net6.0" "freebsd-x64"
+        #     Package "net6.0" "linux-x86"
+        # fi
     else
         Package "$FRAMEWORK" "$RID"
     fi
 fi
 
-if [ "$INSTALLER" = "YES" ];
-then
-    InstallInno
-    BuildInstaller "net6.0" "win-x64"
-    BuildInstaller "net6.0" "win-x86"
-    RemoveInno
-fi
+InstallInno
+BuildInstaller "net6.0" "win-x64"
+BuildInstaller "net6.0" "win-x86"
+RemoveInno

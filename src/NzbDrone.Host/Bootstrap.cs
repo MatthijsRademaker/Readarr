@@ -41,8 +41,7 @@ namespace NzbDrone.Host
             "Readarr.Core",
             "Readarr.SignalR",
             "Readarr.Api.V1",
-            "Readarr.Http",
-            "WishListNotification"
+            "Readarr.Http"
         };
 
         public static void Start(string[] args, Action<IHostBuilder> trayCallback = null)

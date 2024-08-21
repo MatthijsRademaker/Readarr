@@ -3,6 +3,7 @@ using NLog;
 using NzbDrone.Core.Configuration;
 using NzbDrone.Core.Download.TrackedDownloads;
 using NzbDrone.Core.Messaging.Events;
+using WishListNotification;
 
 namespace NzbDrone.Core.Download
 {
@@ -13,14 +14,17 @@ namespace NzbDrone.Core.Download
         private readonly IConfigService _configService;
         private readonly IProvideDownloadClient _downloadClientProvider;
         private readonly Logger _logger;
+        private readonly IWishListNotifier _wishListNotifier;
 
         public DownloadEventHub(IConfigService configService,
             IProvideDownloadClient downloadClientProvider,
-            Logger logger)
+            Logger logger,
+            IWishListNotifier wishListNotifier)
         {
             _configService = configService;
             _downloadClientProvider = downloadClientProvider;
             _logger = logger;
+            _wishListNotifier = wishListNotifier;
         }
 
         public void Handle(DownloadFailedEvent message)
@@ -50,6 +54,8 @@ namespace NzbDrone.Core.Download
             var trackedDownload = message.TrackedDownload;
             var downloadClient = _downloadClientProvider.Get(trackedDownload.DownloadClient);
             var definition = downloadClient.Definition as DownloadClientDefinition;
+
+            _wishListNotifier.NotifyUsers(message);
 
             MarkItemAsImported(trackedDownload, downloadClient);
 

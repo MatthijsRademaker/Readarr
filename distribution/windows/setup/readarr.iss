@@ -6,15 +6,15 @@
 #define AppURL "https://readarr.com/"
 #define ForumsURL "https://readarr.com/discord"
 #define AppExeName "Readarr.exe"
-#define BaseVersion GetEnv('MAJORVERSION')
-#define BuildNumber GetEnv('MINORVERSION')
-#define BuildVersion GetEnv('READARRVERSION')
+#define BaseVersion "1"
+#define BuildNumber "1"
+#define BuildVersion "1"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{EA316CFC-40C5-4104-A7E1-AFA4D42702D8}
+AppId={{EA316CFC-40C5-4104-A7E1-AFA4D42702D8}}
 AppName={#AppName}
 AppVersion={#BaseVersion}
 AppPublisher={#AppPublisher}
